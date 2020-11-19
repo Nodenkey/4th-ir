@@ -9,7 +9,7 @@ const CounterChallengeMore = () => {
         <CounterMoreWrapper>
             <PageHeader>Find out more about the 4th-IR People Counter Virtual Challenge!</PageHeader>
             <Button type="download" link="#" color={darkBlue[400]}>Challenge Rules</Button>
-            <Button link="#">Challenge Rules</Button>
+            <Button link="/counter-register">Register now</Button>
         </CounterMoreWrapper>
     );
 };

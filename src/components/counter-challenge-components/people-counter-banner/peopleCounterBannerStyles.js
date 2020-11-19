@@ -15,7 +15,7 @@ export const CounterBannerText = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 150px 5vw 0;
+  padding: 120px 5vw 0;
 `;
 
 export const CounterBannerHeader = styled.h1`

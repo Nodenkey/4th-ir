@@ -10,10 +10,9 @@ import {
     FormAside, Paragraph, FormButton, ErrorParagraph, NamesContainer, SocialImages
 } from "./contact.style";
 import {Grid, PageSubHeaderAlt} from "../toolbelt/toolbelt.style";
-import {validateName, errorObject, validateEMail, validateContact, validateForm} from "../../utils/validation";
+import {validateName, errorObject, validateEMail, validateContact} from "../../utils/validation";
 import {LinkedInLink} from "../footer/footer.style";
 import {LinkedInSvg, TwitterSvg} from "../svg/svg.component";
-import emailjs from 'emailjs-com';
 
 
 
@@ -54,23 +53,8 @@ const Contact = ({showFailedModal, showSuccessModal}) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const isValid = validateForm(e);
+        // const isValid = validateForm(e);
         setError();
-
-        if (isValid) {
-            e.preventDefault();
-            emailjs.sendForm('gmail', 'template_ufjgd19', e.target, 'user_BSI1ar1qgllhf9evPnuFW')
-                .then((result) => {
-                    showSuccessModal();
-                }, (error) => {
-                    console.log(error.text);
-                    showFailedModal();
-                });// console.log('success');
-        }
-        else{
-            // console.log('failed');
-        }
-        e.target.reset();
     }
 
     return (

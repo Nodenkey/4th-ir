@@ -112,6 +112,8 @@ export const ErrorParagraph = styled.small`
   text-align: left;
   margin: 10px 0 0;
   min-height: 1rem;
+  font-weight: 500;
+  display: block;
 `;
 
 export const NamesContainer = styled(Flex)`

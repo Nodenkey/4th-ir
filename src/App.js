@@ -32,6 +32,7 @@ const VCP = lazy(() => import("./pages/vcp"));
 const VDS = lazy(() => import("./pages/vds"));
 const VSI = lazy(() => import("./pages/vsi"));
 const PeopleCounter = lazy(() => import("./pages/people-counter"));
+const CounterRegister = lazy(() => import("./pages/counter-register"));
 
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
                     <Route path='/case-study' component={CaseStudyPage}/>
                     <Route path='/innovation-challenges' component={ChallengesPage}/>
                     <Route path='/people-counter' component={PeopleCounter}/>
+                    <Route path='/counter-register' component={CounterRegister}/>
                 </Switch>
                 <Footer/>
                 {
