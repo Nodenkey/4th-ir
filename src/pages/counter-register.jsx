@@ -6,7 +6,7 @@ import {
     FormWrapper,
     NamesContainer, TextArea
 } from "../components/contact/contact.style";
-import {errorObject, validateContact, validateEMail, validateForm, validateName} from "../utils/validation";
+import {errorObject, validateContact, validateEMail, validateName} from "../utils/validation";
 import {CounterRegisterWrapper} from "../components/counter-challenge-components/counterRegisterStyles";
 
 const CounterRegister = () => {
@@ -48,7 +48,7 @@ const CounterRegister = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const isValid = validateForm(e);
+        // const isValid = validateForm(e);
         setError();
         e.target.reset();
     }
