@@ -6,10 +6,25 @@ import {
     FormWrapper,
     NamesContainer, TextArea
 } from "../components/contact/contact.style";
-import {errorObject, validateContact, validateEMail, validateName} from "../utils/validation";
+import {errorObject, validateEMail, validateName, validateRegistration} from "../utils/validation";
 import {CounterRegisterWrapper} from "../components/counter-challenge-components/counterRegisterStyles";
 
 const CounterRegister = () => {
+
+    const [registerDetails, setRegisterDetails] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        nationality: '',
+        country: '',
+        city: '',
+        address: '',
+        university: '',
+        company: '',
+        channel: '',
+        message: '',
+
+    })
 
     const [errorMessage, setErrorMessage] = useState({
         firstNameError: '',
@@ -19,6 +34,7 @@ const CounterRegister = () => {
         countryError: '',
         cityError: '',
         addressError: '',
+        channelError: '',
     })
 
     const setError = () => {
@@ -27,30 +43,40 @@ const CounterRegister = () => {
         setErrorMessage({...errorMessage, [error]: message});
     };
 
+    const handleChange = e => {
+        setRegisterDetails({...registerDetails, [e.target.name] : e.target.value});
+    }
+
+
     const validateNames = event => {
         const error = event.target.name + 'Error';
         validateName(event.target, error);
+        handleChange(event);
         setError();
     };
 
     const validateMail = e => {
         const error = e.target.name + 'Error';
         validateEMail(e.target, error);
+        handleChange(e);
         setError();
     };
 
-    const validatePhone = e => {
-        const error = e.target.name + 'Error';
-        validateContact(e.target, error);
-        setError();
-    }
+    const makeChannelValid = e => {
+        setErrorMessage({...errorMessage, channelError: ''});
+        setRegisterDetails({...registerDetails, channel: e.target.value});
+    };
 
 
     const handleSubmit = e => {
         e.preventDefault();
-        // const isValid = validateForm(e);
+        const isValid = validateRegistration(e);
         setError();
-        e.target.reset();
+        if (isValid) {
+            console.log('success!');
+            console.log(registerDetails);
+            e.target.reset();
+        }
     }
 
     return (
@@ -96,76 +122,69 @@ const CounterRegister = () => {
                     <FormLabel>
                         Country of Residence*
                         <FormInput type='text' name='country'
-                                   onChange={validatePhone}
-                                   onBlur={validatePhone}
+                                   onChange={validateNames}
+                                   onBlur={validateNames}
                         />
                         <ErrorParagraph>{errorMessage.countryError}</ErrorParagraph>
                     </FormLabel>
                     <FormLabel>
                         City of Residence*
                         <FormInput type='text' name='city'
-                                   onChange={validatePhone}
-                                   onBlur={validatePhone}
+                                   onChange={validateNames}
+                                   onBlur={validateNames}
                         />
                         <ErrorParagraph>{errorMessage.cityError}</ErrorParagraph>
                     </FormLabel>
                     <FormLabel>
                         Residential Address*
                         <FormInput type='text' name='address'
-                                   onChange={validatePhone}
-                                   onBlur={validatePhone}
+                                   onChange={validateNames}
+                                   onBlur={validateNames}
                         />
                         <ErrorParagraph>{errorMessage.addressError}</ErrorParagraph>
                     </FormLabel>
                     <FormLabel>
                         University name
-                        <FormInput type='text' name='university'
-                                   onChange={validatePhone}
-                                   onBlur={validatePhone}
+                        <FormInput type='text' name='university' onChange={handleChange}
+
                         />
                         <ErrorParagraph/>
                     </FormLabel>
                     <FormLabel>
                         Company name
-                        <FormInput type='text' name='company'
-                                   onChange={validatePhone}
-                                   onBlur={validatePhone}
+                        <FormInput type='text' name='company' onChange={handleChange}
                         />
                         <ErrorParagraph/>
                     </FormLabel>
                     <FormLabel>How did you hear about this program?</FormLabel>
                     <FormLabel className="radio-label">
                         <FormInput type='radio' name='channel' value="online"
-                                   onChange={validatePhone}
-                                   onBlur={validatePhone}
+                                   onClick={makeChannelValid}
                         />
                         Online
                     </FormLabel>
                     <FormLabel className="radio-label">
                         <FormInput type='radio' name='channel' value="recommendation"
-                                   onChange={validatePhone}
-                                   onBlur={validatePhone}
+                                   onClick={makeChannelValid}
                         />
                         Recommendation from a Friend
                     </FormLabel>
                     <FormLabel className="radio-label">
                         <FormInput type='radio' name='channel' value="social"
-                                   onChange={validatePhone}
-                                   onBlur={validatePhone}
+                                   onClick={makeChannelValid}
                         />
                         Social Media (LinkedIn, Facebook)
                     </FormLabel>
                     <FormLabel className="radio-label">
                         <FormInput type='radio' name='channel' value="other"
-                                   onChange={validatePhone}
-                                   onBlur={validatePhone}
+                                   onClick={makeChannelValid}
                         />
                         Other
                     </FormLabel>
-                    <ErrorParagraph>{errorMessage.phoneError}</ErrorParagraph>
+                    <ErrorParagraph>{errorMessage.channelError}</ErrorParagraph>
                     <FormLabel>
                         Message
-                        <TextArea rows='10' name='message'/>
+                        <TextArea rows='10' name='message' onChange={handleChange}/>
                     </FormLabel>
                     <FormButton>Register</FormButton>
                 </Form>

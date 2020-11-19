@@ -8,6 +8,6 @@ export const CounterMoreWrapper = styled.section`
   button {
     display: block;
     margin: 0 auto 30px;
-    min-width: 250px;
+    min-width: 270px;
   }
 `;

@@ -2,6 +2,7 @@
 let message = '';
 let errorReturn = '';
 
+
 // Error object to be returned
 export const errorObject = {
     error: errorReturn,
@@ -21,6 +22,7 @@ const makeInvalid = (field, message, error) => {
     errorObject.error = error;
     errorObject.message = message;
     field.classList.add('error-box');
+    field.focus();
 }
 
 // UTILS
@@ -107,13 +109,47 @@ export const validateContact = (field, error) => {
 
 };
 
+const validateRadioButtons = (event, name, error) => {
+    let item;
+    let focusItem;
+    let i = 0;
+    for (item of event.target) {
+        if (item.name === name) {
+            focusItem = item;
+            if (item.checked) {
+                i++;
+            }
+        }
+    }
+    if (i > 0) {
+        errorObject.error = error;
+        errorObject.message = '';
+        return true;
+    } else {
+        errorObject.error = error;
+        errorObject.message = 'Please make a selection';
+        focusItem.focus();
+        return false;
+    }
+};
+
 export const validateForm = e => {
-    console.log(e.target[1]);
     return validateName(e.target[0], e.target[0].name + 'Error') &&
         validateName(e.target[1], e.target[1].name + 'Error') &&
         validateEMail(e.target[2], e.target[2].name + 'Error') &&
         validateName(e.target[3], e.target[3].name + 'Error') &&
         validateContact(e.target[4], e.target[4].name + 'Error')
+}
+
+export const validateRegistration = e => {
+    return validateName(e.target[0], e.target[0].name + 'Error') &&
+        validateName(e.target[1], e.target[1].name + 'Error') &&
+        validateEMail(e.target[2], e.target[2].name + 'Error') &&
+        validateName(e.target[3], e.target[3].name + 'Error') &&
+        validateName(e.target[3], e.target[3].name + 'Error') &&
+        validateName(e.target[3], e.target[3].name + 'Error') &&
+        validateName(e.target[3], e.target[3].name + 'Error') &&
+        validateRadioButtons(e, 'channel', 'channelError');
 }
 
 
