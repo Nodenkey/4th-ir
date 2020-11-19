@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <g id="Group_3179" data-name="Group 3179" transform="translate(-102 -1129)">
+    <g id="Group_1628" data-name="Group 1628" transform="translate(-1465 -7031)">
+      <g id="Path_2090" data-name="Path 2090" transform="translate(1577 8170)" fill="none">
+        <path d="M0,0H100V100H0Z" stroke="none"/>
+        <path d="M 4 4 L 4 96 L 96 96 L 96 4 L 4 4 M 0 0 L 100 0 L 100 100 L 0 100 L 0 0 Z" stroke="none" fill="#003145"/>
+      </g>
+      <rect id="Rectangle_449" data-name="Rectangle 449" width="20" height="20" rx="3" transform="translate(1567 8160)" fill="#003145"/>
+      <rect id="Rectangle_452" data-name="Rectangle 452" width="20" height="20" rx="3" transform="translate(1567 8260)" fill="#003145"/>
+      <rect id="Rectangle_450" data-name="Rectangle 450" width="20" height="20" rx="3" transform="translate(1667 8160)" fill="#003145"/>
+      <rect id="Rectangle_451" data-name="Rectangle 451" width="20" height="20" rx="3" transform="translate(1667 8260)" fill="#003145"/>
+      <rect id="Rectangle_453" data-name="Rectangle 453" width="20" height="20" rx="3" transform="translate(1617 8260)" fill="#003145"/>
+      <rect id="Rectangle_455" data-name="Rectangle 455" width="20" height="20" rx="3" transform="translate(1667 8210)" fill="#003145"/>
+      <rect id="Rectangle_456" data-name="Rectangle 456" width="20" height="20" rx="3" transform="translate(1567 8210)" fill="#003145"/>
+      <rect id="Rectangle_454" data-name="Rectangle 454" width="20" height="20" rx="3" transform="translate(1617 8160)" fill="#003145"/>
+    </g>
+  </g>
+</svg>
