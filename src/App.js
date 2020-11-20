@@ -1,7 +1,7 @@
 import React, {lazy, Suspense, useState} from 'react';
 import {GlobalStyle} from "./utils/global";
 import NavBar from "./components/navbar/navbar.component";
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, useLocation} from 'react-router-dom';
 import Loading from "./components/loading/loading.component";
 import Footer from "./components/footer/footer.component";
 import ScrollToTop from "./utils/scroll-to-top";
@@ -33,6 +33,8 @@ const VDS = lazy(() => import("./pages/vds"));
 const VSI = lazy(() => import("./pages/vsi"));
 const PeopleCounter = lazy(() => import("./pages/people-counter"));
 const CounterRegister = lazy(() => import("./pages/counter-register"));
+const Admin = lazy(() => import("./pages/admin"));
+const Dashboard = lazy(() => import("./pages/adminDashboard"));
 
 
 function App() {
@@ -62,11 +64,17 @@ function App() {
         !success && setSuccess(true);
     }
 
+    // use location
+    const location = useLocation();
+
+
     return (
         <div className="App">
             <GlobalStyle/>
             <Suspense fallback={<Loading/>}>
-                <NavBar/>
+                {
+                    (location.pathname !== "/admin" && location.pathname !== "/dashboard") && <NavBar/>
+                }
                 <ScrollToTop/>
                 <Switch>
                     <Route exact path='/' component={Home}/>
@@ -92,8 +100,12 @@ function App() {
                     <Route path='/innovation-challenges' component={ChallengesPage}/>
                     <Route path='/people-counter' component={PeopleCounter}/>
                     <Route path='/counter-register' component={CounterRegister}/>
+                    <Route path='/admin' component={Admin}/>
+                    <Route path='/dashboard' component={Dashboard}/>
                 </Switch>
-                <Footer/>
+                {
+                    (location.pathname !== "/admin" && location.pathname !== "/dashboard") && <Footer/>
+                }
                 {
                     success && <SuccessModal close={closeSuccessModal}/>
                 }
