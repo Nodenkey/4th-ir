@@ -149,7 +149,8 @@ export const validateRegistration = e => {
         validateName(e.target[3], e.target[3].name + 'Error') &&
         validateName(e.target[3], e.target[3].name + 'Error') &&
         validateName(e.target[3], e.target[3].name + 'Error') &&
-        validateRadioButtons(e, 'channel', 'channelError');
+        validateRadioButtons(e, 'channel', 'channelError') &&
+        validateRadioButtons(e, 'colab', 'colabError');
 }
 
 

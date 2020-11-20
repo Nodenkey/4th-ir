@@ -17,6 +17,8 @@ export const AdminModalWrapper = styled.div`
 export const AdminModalMain = styled.div`
   width: 90%;
   max-width: 600px;
+  max-height: 60vh;
+  overflow-y: auto;
   border-radius: 5px;
   background-color: white;
   -webkit-box-shadow: 6px 4px 7px -1px rgba(0, 0, 0, 0.3);
@@ -50,12 +52,14 @@ export const AdminModalGrid = styled.div`
   display: grid;
   grid-template-columns: .3fr 1fr;
   grid-column-gap: 20px;
+  align-items: center;
   >p:first-of-type {
     color: ${lightBlue[400]};
   }
   p {
     padding: 0;
-    margin: 10px;
+    margin: 0 10px;
+    width: 100%;
   }
   .list p {
     display: inline-block;

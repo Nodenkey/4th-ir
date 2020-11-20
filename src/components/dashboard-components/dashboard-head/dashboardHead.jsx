@@ -17,7 +17,13 @@ import {firestoreConnect} from "react-redux-firebase";
 import {csvConverter} from "../../../utils/csvConverter";
 import {download} from "../../../utils/downloader";
 import {signOut} from "../../../redux/actions/authActions";
-import {DashboardButton, DashboardElement, DashboardHeadGrid, DashboardHeadWrapper} from "./dashboardHeadStyles";
+import {
+    DashboardButton,
+    DashboardElement,
+    DashboardHeadGrid,
+    DashboardHeadWrapper,
+    DashboardTitle
+} from "./dashboardHeadStyles";
 
 
 const DashboardHead = ({details, logout, auth}) => {
@@ -55,6 +61,10 @@ const DashboardHead = ({details, logout, auth}) => {
                     Download as csv
                 </DashboardButton>
             </DashboardHeadWrapper>
+            <DashboardHeadWrapper>
+                <p>4th-IR People Counter Virtual Challenge</p>
+            </DashboardHeadWrapper>
+            <DashboardTitle>Registered Participants</DashboardTitle>
             {
                 x.matches ?
                     <DashboardHeadGrid className="dash-header">
@@ -89,7 +99,6 @@ const DashboardHead = ({details, logout, auth}) => {
                             <p>Channel</p>
                         </div>
                     </DashboardHeadGrid>
-
             }
         </>
     );

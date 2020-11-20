@@ -14,7 +14,7 @@ export const CounterRegisterWrapper = styled(ContactWrapper)`
   }
   >div {
     max-width: 885px;
-    padding: 50px 20px;
+    padding: 24px 20px 50px;
   }
   .radio-label {
     font-weight: 400;
@@ -34,7 +34,7 @@ export const CounterRegisterWrapper = styled(ContactWrapper)`
       font-size: 2.1875rem;
     }
     >div {
-      padding: 50px;
+      padding: 24px 50px 50px;
     }
   }
 `;

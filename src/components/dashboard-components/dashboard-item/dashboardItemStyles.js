@@ -3,18 +3,21 @@ import {darkBlue} from "../../../utils";
 
 export const DashboardItemWrapper = styled.div`
   display: grid;
-  width: 100%;
+  width: 90%;
+  margin: 0 5%;
   grid-template-columns: 2fr 2fr;
   grid-column-gap: 20px;
   position: relative;
-  border-bottom: 2px solid ${darkBlue[300]};
-  padding: 30px 5vw;
+  padding: 20px 5vw;
   cursor: pointer;
   transition: 300ms ease-in-out;
-  font-size: .7rem;
-  color: #F9F9F9;
+  font-size: .8rem;
+  font-weight: 500;
+  color: ${darkBlue[400]};
   &:hover {
-    background-color: ${darkBlue[300]};
+    -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);  
+    -moz-box-shadow:    0 3px 3px rgba(0, 0, 0, 0.2);  
+    box-shadow:         0 3px 3px rgba(0, 0, 0, 0.2);
   }
   div {
     display: flex;
@@ -23,12 +26,12 @@ export const DashboardItemWrapper = styled.div`
   }
   @media only screen and (min-width: 600px) {
     grid-template-columns: 2fr 2fr 2fr 2fr 1.5fr;
-    font-size: .9rem;
+    font-size: 1rem;
   }
 `;
 
 export const Bar = styled.div`
-  width: 2px;
+  width: 1px;
   height: 100%;
   background-color: ${darkBlue[300]};
 `;

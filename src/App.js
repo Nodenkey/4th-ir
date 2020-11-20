@@ -35,6 +35,7 @@ const PeopleCounter = lazy(() => import("./pages/people-counter"));
 const CounterRegister = lazy(() => import("./pages/counter-register"));
 const Admin = lazy(() => import("./pages/admin"));
 const Dashboard = lazy(() => import("./pages/adminDashboard"));
+const SuccessPage = lazy(() => import("./components/counter-challenge-components/success-page/successPage"));
 
 
 function App() {
@@ -102,6 +103,7 @@ function App() {
                     <Route path='/counter-register' component={CounterRegister}/>
                     <Route path='/admin' component={Admin}/>
                     <Route path='/dashboard' component={Dashboard}/>
+                    <Route path='/success' component={SuccessPage}/>
                 </Switch>
                 {
                     (location.pathname !== "/admin" && location.pathname !== "/dashboard") && <Footer/>

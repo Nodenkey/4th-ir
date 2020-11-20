@@ -3,7 +3,7 @@ import Modal from "../modal/modal";
 import {v4} from "uuid";
 import {Bar, DashboardItemWrapper} from "./dashboardItemStyles";
 
-const DashboardItem = ({name, email, city, country, channel, num}) => {
+const DashboardItem = ({name, email, nationality, address, university, company, colab, message, city, country, channel, num}) => {
     const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
@@ -17,7 +17,8 @@ const DashboardItem = ({name, email, city, country, channel, num}) => {
         <>
             {
                 showModal && <Modal key={v4()} setShowModal={setShowModal} name={name} email={email} country={country}
-                                    city={city} channel={channel}/>
+                                    city={city} channel={channel} nationality={nationality} address={address}
+                                    university={university} company={company} colab={colab} message={message}/>
             }
             {
                 x.matches ?

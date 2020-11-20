@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
     ErrorParagraph,
     Form, FormButton, FormInput,
@@ -8,8 +8,14 @@ import {
 } from "../components/contact/contact.style";
 import {errorObject, validateEMail, validateName, validateRegistration} from "../utils/validation";
 import {CounterRegisterWrapper} from "../components/counter-challenge-components/counterRegisterStyles";
+import {connect} from 'react-redux';
+import {registerUser} from "../redux/actions/registerActions";
+import {Redirect} from "react-router-dom";
 
-const CounterRegister = () => {
+
+
+const CounterRegister = ({registerUser, registrationError, registrationSuccess}) => {
+    const formSubmitRef = useRef(null);
 
     const [registerDetails, setRegisterDetails] = useState({
         firstName: '',
@@ -22,6 +28,7 @@ const CounterRegister = () => {
         university: '',
         company: '',
         channel: '',
+        colab: '',
         message: '',
 
     })
@@ -35,6 +42,8 @@ const CounterRegister = () => {
         cityError: '',
         addressError: '',
         channelError: '',
+        colabError: '',
+        formSubmitError: '',
     })
 
     const setError = () => {
@@ -44,7 +53,7 @@ const CounterRegister = () => {
     };
 
     const handleChange = e => {
-        setRegisterDetails({...registerDetails, [e.target.name] : e.target.value});
+        setRegisterDetails({...registerDetails, [e.target.name]: e.target.value});
     }
 
 
@@ -67,6 +76,11 @@ const CounterRegister = () => {
         setRegisterDetails({...registerDetails, channel: e.target.value});
     };
 
+    const makeColabValid = e => {
+        setErrorMessage({...errorMessage, colabError: ''});
+        setRegisterDetails({...registerDetails, colab: e.target.value});
+    };
+
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -74,10 +88,25 @@ const CounterRegister = () => {
         setError();
         if (isValid) {
             console.log('success!');
-            console.log(registerDetails);
+            registerUser(registerDetails);
+        }
+        if (registrationSuccess) {
+            setErrorMessage({
+                ...errorMessage,
+                formSubmitError: ''
+            })
+            console.log('it worked');
             e.target.reset();
+            return <Redirect to="/success"/>
+        } else if (registrationError) {
+            setErrorMessage({
+                ...errorMessage,
+                formSubmitError: 'Something went wrong with submitting your form. Please try again.'
+            })
+            formSubmitRef.current.focus();
         }
     }
+
 
     return (
         <CounterRegisterWrapper>
@@ -85,6 +114,7 @@ const CounterRegister = () => {
             <h2>Serbia</h2>
             <FormWrapper>
                 <Form onSubmit={handleSubmit}>
+                    <ErrorParagraph ref={formSubmitRef}>{errorMessage.formSubmitError}</ErrorParagraph>
                     <NamesContainer>
                         <FormLabel>
                             First Name*
@@ -158,30 +188,44 @@ const CounterRegister = () => {
                     </FormLabel>
                     <FormLabel>How did you hear about this program?</FormLabel>
                     <FormLabel className="radio-label">
-                        <FormInput type='radio' name='channel' value="online"
+                        <FormInput type='radio' name='channel' value="Online"
                                    onClick={makeChannelValid}
                         />
                         Online
                     </FormLabel>
                     <FormLabel className="radio-label">
-                        <FormInput type='radio' name='channel' value="recommendation"
+                        <FormInput type='radio' name='channel' value="Recommendation"
                                    onClick={makeChannelValid}
                         />
                         Recommendation from a Friend
                     </FormLabel>
                     <FormLabel className="radio-label">
-                        <FormInput type='radio' name='channel' value="social"
+                        <FormInput type='radio' name='channel' value="Social"
                                    onClick={makeChannelValid}
                         />
                         Social Media (LinkedIn, Facebook)
                     </FormLabel>
                     <FormLabel className="radio-label">
-                        <FormInput type='radio' name='channel' value="other"
+                        <FormInput type='radio' name='channel' value="Other"
                                    onClick={makeChannelValid}
                         />
                         Other
                     </FormLabel>
                     <ErrorParagraph>{errorMessage.channelError}</ErrorParagraph>
+                    <FormLabel>Are you registering as a team or an individual?</FormLabel>
+                    <FormLabel className="radio-label">
+                        <FormInput type='radio' name='colab' value="Team"
+                                   onClick={makeColabValid}
+                        />
+                        Team
+                    </FormLabel>
+                    <FormLabel className="radio-label">
+                        <FormInput type='radio' name='colab' value="Individual"
+                                   onClick={makeColabValid}
+                        />
+                        Individual
+                    </FormLabel>
+                    <ErrorParagraph>{errorMessage.colabError}</ErrorParagraph>
                     <FormLabel>
                         Message
                         <TextArea rows='10' name='message' onChange={handleChange}/>
@@ -193,4 +237,17 @@ const CounterRegister = () => {
     );
 };
 
-export default CounterRegister;
+const mapDispatchToProp = (dispatch) => {
+    return {
+        registerUser: (details) => dispatch(registerUser(details))
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        registrationError: state.auth.registrationError,
+        registrationSuccess: state.auth.registrationSuccess
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProp)(CounterRegister);

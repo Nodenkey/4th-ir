@@ -45,7 +45,6 @@ const AuthIsLoaded = ({children}) => {
 
 
 ReactDOM.render(
-    <React.StrictMode>
         <Provider store={store}>
             <ReactReduxFirebaseProvider {...rrfProps} >
                 <AuthIsLoaded>
@@ -54,8 +53,7 @@ ReactDOM.render(
                     </BrowserRouter>
                 </AuthIsLoaded>
             </ReactReduxFirebaseProvider>
-        </Provider>
-    </React.StrictMode>,
+        </Provider>,
     document.getElementById('root')
 );
 
