@@ -14,11 +14,19 @@ export const registerUser = (details) => {
                 type: 'REGISTER_USER',
                 details
             })
-        }).catch(err => dispatch({
-            type: 'REGISTER_USER_ERR',
-            err
-        }))
-
+        }).catch(err => {
+            return dispatch({
+                type: 'REGISTER_USER_ERR',
+                err
+            })
+        })
     }
+}
 
+export const removeRegistered = () => {
+    return (dispatch) => {
+        dispatch({
+            type: 'REMOVE_REGISTER'
+        })
+    }
 }

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
     ErrorParagraph,
     Form, FormButton, FormInput,
@@ -10,11 +10,10 @@ import {errorObject, validateEMail, validateName, validateRegistration} from "..
 import {CounterRegisterWrapper} from "../components/counter-challenge-components/counterRegisterStyles";
 import {connect} from 'react-redux';
 import {registerUser} from "../redux/actions/registerActions";
-import {Redirect} from "react-router-dom";
 
 
 
-const CounterRegister = ({registerUser, registrationError, registrationSuccess}) => {
+const CounterRegister = ({registerUser, registrationError, registrationSuccess, history}) => {
     const formSubmitRef = useRef(null);
 
     const [registerDetails, setRegisterDetails] = useState({
@@ -87,17 +86,17 @@ const CounterRegister = ({registerUser, registrationError, registrationSuccess})
         const isValid = validateRegistration(e);
         setError();
         if (isValid) {
-            console.log('success!');
             registerUser(registerDetails);
         }
+    }
+
+    useEffect(() => {
         if (registrationSuccess) {
             setErrorMessage({
                 ...errorMessage,
                 formSubmitError: ''
             })
-            console.log('it worked');
-            e.target.reset();
-            return <Redirect to="/success"/>
+            history.push('/success');
         } else if (registrationError) {
             setErrorMessage({
                 ...errorMessage,
@@ -105,7 +104,7 @@ const CounterRegister = ({registerUser, registrationError, registrationSuccess})
             })
             formSubmitRef.current.focus();
         }
-    }
+    }, [registrationSuccess, registrationError, errorMessage, history])
 
 
     return (
@@ -245,8 +244,8 @@ const mapDispatchToProp = (dispatch) => {
 
 const mapStateToProps = state => {
     return {
-        registrationError: state.auth.registrationError,
-        registrationSuccess: state.auth.registrationSuccess
+        registrationError: state.register.registrationError,
+        registrationSuccess: state.register.registrationSuccess
     }
 }
 

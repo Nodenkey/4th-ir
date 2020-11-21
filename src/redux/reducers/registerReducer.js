@@ -11,6 +11,8 @@ const registerReducer = (state = initialState, action) => {
         case 'REGISTER_USER_ERR':
             console.log('register user failed', action.err);
             return {...state, registrationError: 'Something went wrong, Please try again', registrationSuccess: null};
+        case 'REMOVE_REGISTER':
+            return {...state, registrationSuccess: null, registrationError: null};
         default:
             return state
     }

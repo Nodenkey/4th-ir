@@ -9,6 +9,11 @@ export const errorObject = {
     message: message,
 };
 
+const makeFocus = (field) => {
+    field.focus();
+    field.blur();
+}
+
 // valid and invalid decoration
 
 const makeValid = (field, error) => {
@@ -22,7 +27,7 @@ const makeInvalid = (field, message, error) => {
     errorObject.error = error;
     errorObject.message = message;
     field.classList.add('error-box');
-    field.focus();
+    makeFocus(field);
 }
 
 // UTILS

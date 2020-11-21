@@ -14,6 +14,10 @@ export const DashboardItemWrapper = styled.div`
   font-size: .8rem;
   font-weight: 500;
   color: ${darkBlue[400]};
+  word-break: break-word;
+  &:nth-of-type(2n) {
+    background-color: #EDEDED;
+  }
   &:hover {
     -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);  
     -moz-box-shadow:    0 3px 3px rgba(0, 0, 0, 0.2);  

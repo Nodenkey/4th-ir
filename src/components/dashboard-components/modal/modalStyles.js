@@ -7,7 +7,7 @@ export const AdminModalWrapper = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 2;
   display: flex;
   justify-content: center;
@@ -52,7 +52,7 @@ export const AdminModalGrid = styled.div`
   display: grid;
   grid-template-columns: .3fr 1fr;
   grid-column-gap: 20px;
-  align-items: center;
+  align-items: flex-start;
   >p:first-of-type {
     color: ${lightBlue[400]};
   }
