@@ -2,6 +2,8 @@
 let message = '';
 let errorReturn = '';
 
+//create focusable
+let focusable = false;
 
 // Error object to be returned
 export const errorObject = {
@@ -9,9 +11,10 @@ export const errorObject = {
     message: message,
 };
 
-const makeFocus = (field) => {
-    field.focus();
-    field.blur();
+const checkFocus = (field) => {
+    if(focusable) {
+        field.focus();
+    }
 }
 
 // valid and invalid decoration
@@ -27,7 +30,7 @@ const makeInvalid = (field, message, error) => {
     errorObject.error = error;
     errorObject.message = message;
     field.classList.add('error-box');
-    makeFocus(field);
+    checkFocus(field);
 }
 
 // UTILS
@@ -87,11 +90,13 @@ const matchWithRegEx = (field, regEx, message, error) => {
 };
 
 //INDIVIDUAL VAL
-export const validateName = (field, error) => {
+export const validateName = (field, error, focusSetter) => {
+    focusable = !!focusSetter;
     return validateEmpty(field, error);
 }
 
-export const validateEMail = (field, error) => {
+export const validateEMail = (field, error, focusSetter) => {
+    focusable = !!focusSetter;
     if (!containsCharacters(field, 5, error)) {
     } else {
         makeValid(field, error);
@@ -99,7 +104,8 @@ export const validateEMail = (field, error) => {
     }
 };
 
-export const validateContact = (field, error) => {
+export const validateContact = (field, error, focusSetter) => {
+    focusable = !!focusSetter;
     const contact = field.value;
     if (isNaN(contact)) {
         makeInvalid(field, 'Please enter numbers only', error);
@@ -114,7 +120,8 @@ export const validateContact = (field, error) => {
 
 };
 
-const validateRadioButtons = (event, name, error) => {
+const validateRadioButtons = (event, name, error, focusSetter) => {
+    focusable = !!focusSetter;
     let item;
     let focusItem;
     let i = 0;
@@ -138,24 +145,28 @@ const validateRadioButtons = (event, name, error) => {
     }
 };
 
+//focus setter
+
+const focusSetter = true;
+
 export const validateForm = e => {
-    return validateName(e.target[0], e.target[0].name + 'Error') &&
-        validateName(e.target[1], e.target[1].name + 'Error') &&
-        validateEMail(e.target[2], e.target[2].name + 'Error') &&
-        validateName(e.target[3], e.target[3].name + 'Error') &&
-        validateContact(e.target[4], e.target[4].name + 'Error')
+    return validateName(e.target[0], e.target[0].name + 'Error', focusSetter) &&
+        validateName(e.target[1], e.target[1].name + 'Error', focusSetter) &&
+        validateEMail(e.target[2], e.target[2].name + 'Error', focusSetter) &&
+        validateName(e.target[3], e.target[3].name + 'Error', focusSetter) &&
+        validateContact(e.target[4], e.target[4].name + 'Error', focusSetter)
 }
 
 export const validateRegistration = e => {
-    return validateName(e.target[0], e.target[0].name + 'Error') &&
-        validateName(e.target[1], e.target[1].name + 'Error') &&
-        validateEMail(e.target[2], e.target[2].name + 'Error') &&
-        validateName(e.target[3], e.target[3].name + 'Error') &&
-        validateName(e.target[3], e.target[3].name + 'Error') &&
-        validateName(e.target[3], e.target[3].name + 'Error') &&
-        validateName(e.target[3], e.target[3].name + 'Error') &&
-        validateRadioButtons(e, 'channel', 'channelError') &&
-        validateRadioButtons(e, 'colab', 'colabError');
+    return validateName(e.target[0], e.target[0].name + 'Error', focusSetter) &&
+        validateName(e.target[1], e.target[1].name + 'Error', focusSetter) &&
+        validateEMail(e.target[2], e.target[2].name + 'Error', focusSetter) &&
+        validateName(e.target[3], e.target[3].name + 'Error', focusSetter) &&
+        validateName(e.target[3], e.target[3].name + 'Error', focusSetter) &&
+        validateName(e.target[3], e.target[3].name + 'Error', focusSetter) &&
+        validateName(e.target[3], e.target[3].name + 'Error', focusSetter) &&
+        validateRadioButtons(e, 'channel', 'channelError', focusSetter) &&
+        validateRadioButtons(e, 'colab', 'colabError', focusSetter);
 }
 
 
