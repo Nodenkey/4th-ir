@@ -1,8 +1,11 @@
+import axios from "axios";
+
 // create register action
 export const registerUser = (details) => {
     // because we are going to do an async call we use thunk to halt the dispatch process and
     // add to firebase before continuing to go update the state.
     // destructure getFirebase and getFirebase from the extraArgument on the thunk
+
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         //make async call to firestore
         const firestore = getFirestore();
@@ -14,6 +17,13 @@ export const registerUser = (details) => {
                 type: 'REGISTER_USER',
                 details
             })
+            try {
+                const res =  axios.post("http://localhost:5000/counter-register", {details});
+                console.log(res);
+            }
+            catch (e) {
+                console.log(e);
+            }
         }).catch(err => {
             return dispatch({
                 type: 'REGISTER_USER_ERR',

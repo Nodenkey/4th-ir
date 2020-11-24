@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {lightBlue} from "../../../utils";
+import {darkBlue, lightBlue} from "../../../utils";
 
 export const AdminModalWrapper = styled.div`
   position: fixed;
@@ -20,6 +20,7 @@ export const AdminModalMain = styled.div`
   max-height: 60vh;
   overflow-y: auto;
   border-radius: 5px;
+  border: 3px solid ${darkBlue[400]};
   background-color: white;
   -webkit-box-shadow: 6px 4px 7px -1px rgba(0, 0, 0, 0.3);
   box-shadow: 6px 4px 7px -1px rgba(0, 0, 0, 0.3);

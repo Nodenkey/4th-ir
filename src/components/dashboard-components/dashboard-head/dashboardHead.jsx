@@ -29,7 +29,7 @@ import {
 const DashboardHead = ({details, logout, auth}) => {
 
     const makeExcel = (details) => {
-        const csvData = csvConverter(details);
+        const csvData = csvConverter(details, ['firstName', 'lastName', 'email', 'nationality', 'country', 'address', 'city', 'university', 'colab', 'channel', 'company', 'message']);
         download(csvData);
     }
 

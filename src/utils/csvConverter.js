@@ -1,10 +1,11 @@
-export const csvConverter = (data) => {
+export const csvConverter = (data, csvHeaders) => {
     console.log(data);
     //create rows for csv
     const csvRows = [];
 
     //get headers
-    const headers = Object.keys(data[0]);
+    let headers = '';
+    !csvHeaders ? headers = Object.keys(data[0]) : headers = csvHeaders
     //join the rows by a comma.. it becomes a string separated by comma
     csvRows.push(headers.join(","));
 
