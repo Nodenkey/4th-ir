@@ -13,17 +13,21 @@ export const registerUser = (details) => {
             ...details,
             createdAt: new Date()
         }).then(() => {
-            dispatch({
-                type: 'REGISTER_USER',
-                details
+            const res = axios.post("http://localhost:5000/counter-register", {details});
+            const data = res.then((response) => response.data);
+            data.then(res => {
+                res === 'OK' && dispatch({
+                    type: 'REGISTER_USER',
+                    details
+                })
             })
-            try {
-                const res =  axios.post("http://localhost:5000/counter-register", {details});
-                console.log(res);
-            }
-            catch (e) {
-                console.log(e);
-            }
+                .catch(err => {
+                        return dispatch({
+                            type: 'REGISTER_USER_ERR',
+                            err
+                        })
+                    }
+                );
         }).catch(err => {
             return dispatch({
                 type: 'REGISTER_USER_ERR',
