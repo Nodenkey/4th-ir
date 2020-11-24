@@ -13,7 +13,7 @@ export const registerUser = (details) => {
             ...details,
             createdAt: new Date()
         }).then(() => {
-            const res = axios.post("http://localhost:5000/counter-register", {details});
+            const res = axios.post("https://young-mesa-67771.herokuapp.com/counter-register", {details});
             const data = res.then((response) => response.data);
             data.then(res => {
                 res === 'OK' && dispatch({
